@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <script>
+        var baseUrl = "http://localhost:8080";
+        function handleJwt(e) {
+            e.preventDefault();
+            var user = document.forms["jwt"]["user"].value;
+            var pass = document.forms["jwt"]["pass"].value;
+            var myJSONObject = { user, pass }
+            window.location.href = 'http://localhost:8080/login'
+            requestMethod('/login','POST',myJSONObject);
+        }
+
+        function requestMethod(url, reqmethod, myJSONObject) {
+            fetch(baseUrl + url, {
+                method: reqmethod,
+                headers: {
+                    "content-type": 'application/json'
+                },
+                body: JSON.stringify(myJSONObject),
+            }, function (error, response, body) {
+                console.log(error);
+                console.log(response);
+            });
+        }
+    </script>
+</head>
+
+<h1>JWT</h1>
+<form name="jwt" action='http://localhost:8080/login' method="POST">
+    <input type="text" placeholder="username.." name="user" /><br><br>
+    <input type="password" placeholder="password" name="pass" /><br><br>
+    <input type="submit" value="submit">
+</form>
+
+</html>
