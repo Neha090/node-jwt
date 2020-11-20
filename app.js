@@ -3,8 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const { login, refresh } = require('./jwt/authentication')
-const { addUser, verifyLogin } = require('./hashpassword/DBfunctions')
-//const { addUser,read,verifyLogin } = require('./DBstorage/DBfunctions')
+
 
 const app = express()
 app.use((req, res, next) => {
@@ -25,8 +24,6 @@ app.use(cookieParser())
 
 app.post('/login', login)
 app.post('/refresh', refresh)
-app.post('/addUser', addUser)
-app.post('/loginn', verifyLogin)
 
 app.listen(8080,function(){
   console.log("server start at 8080");
